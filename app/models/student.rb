@@ -2,7 +2,7 @@
 class Student < ApplicationRecord
   # имеет одну уникальную зачётку, которая удалиться при удалении судента
   # destroy – вызывается на связных объектах
-  has_one :record_book, dependent: destroy
+  has_one :record_book
 
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }

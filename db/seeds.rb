@@ -2,11 +2,13 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 # создадим 10 студентов с рандомными именами
+# и создадим зачётки каждому студенту, без оценок
 10.times do
   studentname = Faker::Name.name
-  Student.create studentname: studentname
+  student = Student.create studentname: studentname
+  RecordBook.create student: student
 end
-puts 'Студенты созданы'
+puts 'Студенты с зачётками созданы'
 
 4.times do
   teachername = Faker::Name.name
