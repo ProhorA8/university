@@ -4,6 +4,9 @@ class Student < ApplicationRecord
   # destroy – вызывается на связных объектах
   has_one :record_book
 
+  # имеет много учителей через класс
+  has_many :teachers, through: :classroom
+
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }
 
