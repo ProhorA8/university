@@ -10,6 +10,9 @@ class Student < ApplicationRecord
   # имеет много учителей через расписание
   has_many :teachers, through: :timetable
 
+  # имеет коллекцию книг через полиморфную связь
+  has_many :books, as: :imageable
+
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }
 
