@@ -7,6 +7,9 @@ class Student < ApplicationRecord
   # имеет много учителей через класс
   has_many :teachers, through: :classroom
 
+  # имеет много учителей через расписание
+  has_many :teachers, through: :timetable
+
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }
 
