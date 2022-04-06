@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_154515) do
+ActiveRecord::Schema.define(version: 2022_04_06_154902) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2022_04_06_154515) do
     t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "subject"
+    t.string "teacher"
   end
 
   create_table "students", force: :cascade do |t|
