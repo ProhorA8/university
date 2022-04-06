@@ -13,6 +13,10 @@ class Student < ApplicationRecord
   # имеет коллекцию книг через полиморфную связь
   has_many :books, as: :imageable
 
+  # имеет один факультет и имеет одно название факультета через факультет
+  has_one :faculty
+  has_one :faculty_name, through: :faculty
+
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }
 
