@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_121029) do
+ActiveRecord::Schema.define(version: 2022_04_06_122302) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2022_04_06_121029) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "teachers_journals", force: :cascade do |t|
+    t.integer "teacher_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["teacher_id"], name: "index_teachers_journals_on_teacher_id", unique: true
+  end
+
   create_table "timetables", force: :cascade do |t|
     t.string "lesson"
     t.integer "student_id"
@@ -72,4 +79,5 @@ ActiveRecord::Schema.define(version: 2022_04_06_121029) do
   add_foreign_key "classrooms", "students"
   add_foreign_key "classrooms", "teachers"
   add_foreign_key "record_books", "students"
+  add_foreign_key "teachers_journals", "teachers"
 end

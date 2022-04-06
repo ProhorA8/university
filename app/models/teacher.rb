@@ -9,6 +9,9 @@ class Teacher < ApplicationRecord
   # имеет коллекцию книг через полиморфную связь
   has_many :books, as: :imageable
 
+  # имеет один журнал
+  has_one :teachers_journal
+
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :teachername, presence: true, length: { maximum: 20 }
 end
