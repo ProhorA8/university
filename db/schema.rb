@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_110450) do
+ActiveRecord::Schema.define(version: 2022_04_06_113300) do
 
   create_table "classrooms", force: :cascade do |t|
     t.integer "number", null: false
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2022_04_06_110450) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_classrooms_on_student_id"
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
+  end
+
+  create_table "classrooms_timatables", id: false, force: :cascade do |t|
+    t.integer "classroom_id"
+    t.integer "timetable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_classrooms_timatables_on_classroom_id"
+    t.index ["timetable_id"], name: "index_classrooms_timatables_on_timetable_id"
   end
 
   create_table "record_books", force: :cascade do |t|
