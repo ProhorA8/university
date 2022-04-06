@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_123809) do
+ActiveRecord::Schema.define(version: 2022_04_06_154515) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
     t.integer "imageable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "book_name"
+    t.string "author"
     t.index ["imageable_type", "imageable_id"], name: "index_books_on_imageable"
   end
 
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 2022_04_06_123809) do
     t.string "teachername", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "best_student"
+    t.string "bad_student"
   end
 
   create_table "teachers_journals", force: :cascade do |t|
