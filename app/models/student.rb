@@ -19,6 +19,8 @@ class Student < ApplicationRecord
 
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }
+  # обязательное наличие возраста в диапазоне 18..40
+  validates :age, presence: true, inclusion: { in: (18..40) }
 
   # колбэк перед валидацие, если студент без имени то устанавливаем имя сами
   before_validation {
