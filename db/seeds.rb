@@ -4,8 +4,9 @@
 # создадим 10 студентов с рандомными именами
 # и создадим зачётки каждому студенту, без оценок
 10.times do
+  student_age = (18..40)
   studentname = Faker::Name.name
-  student = Student.create studentname: studentname
+  student = Student.create studentname: studentname, age: rand(student_age)
   RecordBook.create student: student
 end
 puts 'Студенты с зачётками созданы'

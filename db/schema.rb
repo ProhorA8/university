@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_154902) do
+ActiveRecord::Schema.define(version: 2022_04_07_075621) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_154902) do
     t.integer "teacher_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "floor", null: false
     t.index ["student_id"], name: "index_classrooms_on_student_id"
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
   end
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_154902) do
     t.integer "teacher_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "age", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
