@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'rails-erd'
   # Для создания снимков экрана, получения реальных тестовых данных и заполнения вашей базы данных
   gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
