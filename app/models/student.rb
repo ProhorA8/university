@@ -5,7 +5,7 @@ class Student < ApplicationRecord
   has_one :record_book
 
   # имеет много учителей через класс
-  has_many :teachers, through: :classroom
+  has_many :teachers, through: :cabinet
 
   # имеет много учителей через расписание
   has_many :teachers, through: :timetable

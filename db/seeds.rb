@@ -46,7 +46,7 @@ number_students.times do
   # находим 1-ого учителя
   teacher = Teacher.first
   # создаём класс для всех студентов и учителя с номером класса 1 на первом этаже
-  Classroom.create number: 1, teacher_id: teacher.id, student_id: student.id, floor: 1
+  Cabinet.create number: 1, teacher_id: teacher.id, student_id: student.id, floor: 1
 
   Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
 end
