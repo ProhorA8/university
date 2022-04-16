@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_14_173426) do
+ActiveRecord::Schema.define(version: 2022_04_16_124113) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -22,24 +22,24 @@ ActiveRecord::Schema.define(version: 2022_04_14_173426) do
     t.index ["imageable_type", "imageable_id"], name: "index_books_on_imageable"
   end
 
-  create_table "classrooms", force: :cascade do |t|
+  create_table "cabinets", force: :cascade do |t|
     t.integer "number", null: false
     t.integer "student_id", null: false
     t.integer "teacher_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "floor", null: false
-    t.index ["student_id"], name: "index_classrooms_on_student_id"
-    t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
+    t.index ["student_id"], name: "index_cabinets_on_student_id"
+    t.index ["teacher_id"], name: "index_cabinets_on_teacher_id"
   end
 
-  create_table "classrooms_timetables", id: false, force: :cascade do |t|
-    t.integer "classroom_id"
+  create_table "cabinets_timetables", id: false, force: :cascade do |t|
+    t.integer "cabinets_id"
     t.integer "timetable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["classroom_id"], name: "index_classrooms_timetables_on_classroom_id"
-    t.index ["timetable_id"], name: "index_classrooms_timetables_on_timetable_id"
+    t.index ["cabinets_id"], name: "index_cabinets_timetables_on_cabinets_id"
+    t.index ["timetable_id"], name: "index_cabinets_timetables_on_timetable_id"
   end
 
   create_table "faculties", force: :cascade do |t|
@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(version: 2022_04_14_173426) do
     t.index ["teacher_id"], name: "index_timetables_on_teacher_id"
   end
 
-  add_foreign_key "classrooms", "students"
-  add_foreign_key "classrooms", "teachers"
+  add_foreign_key "cabinets", "students"
+  add_foreign_key "cabinets", "teachers"
   add_foreign_key "record_books", "students"
   add_foreign_key "teachers_journals", "teachers"
 end
