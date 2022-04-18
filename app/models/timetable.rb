@@ -4,6 +4,6 @@ class Timetable < ApplicationRecord
   belongs_to :student
   belongs_to :teacher
 
-  # прямое соединение, имеет 0 и > классов
+  # прямое соединение, имеет 0 и > кабинетов
   has_and_belongs_to_many :cabinets
 end

@@ -4,11 +4,13 @@ class Student < ApplicationRecord
   # destroy – вызывается на связных объектах
   has_one :record_book
 
-  # имеет много учителей через класс
-  has_many :teachers, through: :cabinet
+  # имеет много учителей через кабинет
+  has_many :cabinets
+  has_many :teachers, through: :cabinets
 
   # имеет много учителей через расписание
-  has_many :teachers, through: :timetable
+  has_many :timetables
+  has_many :teachers, through: :timetables
 
   # имеет коллекцию книг через полиморфную связь
   has_many :books, as: :imageable
@@ -16,6 +18,9 @@ class Student < ApplicationRecord
   # имеет один факультет и имеет одно название факультета через факультет
   has_one :faculty
   has_one :faculty_name, through: :faculty
+
+  # студент принадлежит группе
+  belongs_to :group
 
   # обязательное присутствие имени с максимальной длиной символов 20
   validates :studentname, presence: true, length: { maximum: 20 }

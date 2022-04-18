@@ -1,10 +1,12 @@
 # Учитель
 class Teacher < ApplicationRecord
-  # имеет много студентов через класс
-  has_many :students, through: :cabinet
+  # имеет много студентов через кабинет
+  has_many :cabinets
+  has_many :students, through: :cabinets
 
   # имеет моного студентов через разписание
-  has_many :students, through: :timetable
+  has_many :timetables
+  has_many :students, through: :timetables
 
   # имеет коллекцию книг через полиморфную связь
   has_many :books, as: :imageable
