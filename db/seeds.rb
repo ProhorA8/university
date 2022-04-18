@@ -24,14 +24,17 @@ puts 'Учителя созданы'
 puts 'Журналы для учителей созданы'
 puts 'Книги для учителей созданы'
 
-# создадим 10 студентов с рандомными именами
-# и создадим зачётки каждому студенту с предметом и оченкой
+# Создаём группу
+group_502 = Group.create number: 502
+
+# создадим 10 студентов в группе 502 с рандомными именами
+# и создадим зачётки каждому студенту с предметом и оценкой
 number_students = 10
 number_students.times do
   student_age = (18..40)
   studentname = Faker::Name.name
   # cоздаём студента
-  student = Student.create studentname: studentname, age: rand(student_age)
+  student = Student.create! studentname: studentname, teacher_id: Teacher.first.id, age: rand(student_age), group_id: group_502.id
   # создаём зачётку студента
   RecordBook.create student: student, subject: "Literature", grade: 5
 
@@ -50,6 +53,7 @@ number_students.times do
 
   Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
 end
+puts 'Группа создана'
 puts 'Студенты созданы'
 puts 'Зачётки созданы'
 puts 'Книги для студента созданы'

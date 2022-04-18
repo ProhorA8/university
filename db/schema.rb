@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_143545) do
+ActiveRecord::Schema.define(version: 2022_04_18_143004) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2022_04_16_143545) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "age", null: false
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_students_on_group_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -109,5 +111,6 @@ ActiveRecord::Schema.define(version: 2022_04_16_143545) do
   add_foreign_key "cabinets", "students"
   add_foreign_key "cabinets", "teachers"
   add_foreign_key "record_books", "students"
+  add_foreign_key "students", "groups"
   add_foreign_key "teachers_journals", "teachers"
 end
