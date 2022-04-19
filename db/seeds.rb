@@ -66,7 +66,16 @@ puts 'Учителя созданы'
 puts 'Журналы для учителей созданы'
 puts 'Книги для учителей созданы'
 
-teacher = Teacher.first
-student = Student.first
-Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
+# создадим расписание
+students = Student.all
+students.each do |student|
+  # для первой половины студентов первый учитель, для другой половины второй
+  if student.id < 6
+    teacher = Teacher.first
+    Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
+  else
+    teacher = Teacher.last
+    Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
+  end
+end
 puts 'Расписание создано'
