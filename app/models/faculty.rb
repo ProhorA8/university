@@ -1,7 +1,7 @@
 # Факультет
 class Faculty < ApplicationRecord
-  # пренадлежит студенту
+  # принадлежит студенту
   belongs_to :student
-  # имеет одино название
+  # имеет одно название
   has_one :faculty_name
 end

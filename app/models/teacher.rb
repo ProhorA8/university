@@ -1,8 +1,7 @@
 # Учитель
 class Teacher < ApplicationRecord
-  # имеет много студентов через кабинет
+  # имеет много кабинетов
   has_many :cabinets
-  has_many :students, through: :cabinets
 
   # имеет моного студентов через разписание
   has_many :timetables

@@ -34,7 +34,7 @@ number_students.times do
   student_age = (18..40)
   studentname = Faker::Name.name
   # cоздаём студента
-  student = Student.create! studentname: studentname, teacher_id: Teacher.first.id, age: rand(student_age), group_id: group_502.id
+  student = Student.create! studentname: studentname, age: rand(student_age), group_id: group_502.id
   # создаём зачётку студента
   RecordBook.create student: student, subject: "Literature", grade: 5
 

@@ -1,5 +1,5 @@
 # Название факультета
 class FacultyName < ApplicationRecord
-  # пренадлежит факультету
+  # принадлежит факультету
   belongs_to :faculty
 end

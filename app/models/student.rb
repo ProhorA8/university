@@ -4,9 +4,8 @@ class Student < ApplicationRecord
   # destroy – вызывается на связных объектах
   has_one :record_book
 
-  # имеет много учителей через кабинет
+  # имеет много кабинетов
   has_many :cabinets
-  has_many :teachers, through: :cabinets
 
   # имеет много учителей через расписание
   has_many :timetables
@@ -23,7 +22,7 @@ class Student < ApplicationRecord
   belongs_to :group
 
   # обязательное присутствие имени с максимальной длиной символов 20
-  validates :studentname, presence: true, length: { maximum: 20 }
+  validates :studentname, presence: true, length: { maximum: 30 }
   # обязательное наличие возраста в диапазоне 18..40
   validates :age, presence: true, inclusion: { in: (18..40) }
 
