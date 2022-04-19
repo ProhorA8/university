@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_19_083053) do
+ActiveRecord::Schema.define(version: 2022_04_19_120146) do
 
   create_table "books", force: :cascade do |t|
     t.string "imageable_type"
@@ -24,13 +24,9 @@ ActiveRecord::Schema.define(version: 2022_04_19_083053) do
 
   create_table "cabinets", force: :cascade do |t|
     t.integer "number", null: false
-    t.integer "student_id", null: false
-    t.integer "teacher_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "floor", null: false
-    t.index ["student_id"], name: "index_cabinets_on_student_id"
-    t.index ["teacher_id"], name: "index_cabinets_on_teacher_id"
   end
 
   create_table "cabinets_timetables", id: false, force: :cascade do |t|
@@ -43,10 +39,8 @@ ActiveRecord::Schema.define(version: 2022_04_19_083053) do
   end
 
   create_table "faculties", force: :cascade do |t|
-    t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["student_id"], name: "index_faculties_on_student_id"
   end
 
   create_table "faculty_names", force: :cascade do |t|
@@ -61,6 +55,10 @@ ActiveRecord::Schema.define(version: 2022_04_19_083053) do
     t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "faculty_id", null: false
+    t.integer "cabinet_id", null: false
+    t.index ["cabinet_id"], name: "index_groups_on_cabinet_id"
+    t.index ["faculty_id"], name: "index_groups_on_faculty_id"
   end
 
   create_table "record_books", force: :cascade do |t|
@@ -87,6 +85,8 @@ ActiveRecord::Schema.define(version: 2022_04_19_083053) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "best_student"
     t.string "bad_student"
+    t.integer "cabinet_id", null: false
+    t.index ["cabinet_id"], name: "index_teachers_on_cabinet_id"
   end
 
   create_table "teachers_journals", force: :cascade do |t|
@@ -107,9 +107,10 @@ ActiveRecord::Schema.define(version: 2022_04_19_083053) do
     t.index ["teacher_id"], name: "index_timetables_on_teacher_id"
   end
 
-  add_foreign_key "cabinets", "students"
-  add_foreign_key "cabinets", "teachers"
+  add_foreign_key "groups", "cabinets"
+  add_foreign_key "groups", "faculties"
   add_foreign_key "record_books", "students"
   add_foreign_key "students", "groups"
+  add_foreign_key "teachers", "cabinets"
   add_foreign_key "teachers_journals", "teachers"
 end

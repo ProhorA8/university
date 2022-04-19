@@ -1,16 +1,58 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
-# создаём учителей
-number_teachers = 2
-group_numbers = 30
-number_teachers.times do
-  teachername = Faker::Name.name
-  teacher = Teacher.create teachername: teachername
+# создаём кабинет с №1 на первом этаже
+cabinet = Cabinet.create number: 1, floor: 1
+puts 'Кабинет создан'
 
-  # создаём журнал учителю
-  TeachersJournal.create teacher_id: teacher.id, group_number: group_numbers
-  group_numbers += 1
+# Создаём факультет
+faculty = Faculty.create
+puts 'Факультет создан'
+
+# Создаём название факультета
+FacultyName.create faculty_id: faculty.id, name: 'МСФ'
+puts 'Название факультета создано'
+
+# Создаём две группы 502, 503
+num = 502
+(1..2).each do
+  Group.create number: num, faculty_id: faculty.id, cabinet_id: cabinet.id
+  num += 1
+end
+puts 'Группы созданы'
+
+# создадим 10 студентов в группе 502 с рандомным именем и возрастом
+# и создадим зачётки каждому студенту с предметом и оценкой 5
+number_students = 10
+number_students.times do
+  student_age = (18..40)
+  name = Faker::Name.name
+  # получаем первую группу
+  group = Group.first
+  # cоздаём студента
+  student = Student.create! studentname: name, age: rand(student_age), group_id: group.id
+  # создаём зачётку студента
+  RecordBook.create student: student, subject: "Literature", grade: 5
+
+  # создадим по 2-е книги каждому студенту
+  (1..2).each do |i|
+    author = Faker::Book.author
+    title = Faker::Book.title
+    book = Book.new book_name: title, author: author
+    student.books << book
+  end
+end
+puts 'Студенты созданы'
+puts 'Зачётки для студентов созданы'
+puts 'Книги для студента созданы'
+
+# создаём учителей
+groups = Group.all
+groups.each do |group|
+  name = Faker::Name.name
+  teacher = Teacher.create teachername: name, cabinet_id: 1
+  # создаём журнал учителю с назначением группы
+  TeachersJournal.create teacher_id: teacher.id, group_number: group.number
 
   # создадим по 2-е книги каждому учителю
   (1..2).each do |i|
@@ -24,47 +66,7 @@ puts 'Учителя созданы'
 puts 'Журналы для учителей созданы'
 puts 'Книги для учителей созданы'
 
-# Создаём группу
-group_502 = Group.create number: 502
-
-# создадим 10 студентов в группе 502 с рандомными именами
-# и создадим зачётки каждому студенту с предметом и оценкой
-number_students = 10
-number_students.times do
-  student_age = (18..40)
-  studentname = Faker::Name.name
-  # cоздаём студента
-  student = Student.create! studentname: studentname, age: rand(student_age), group_id: group_502.id
-  # создаём зачётку студента
-  RecordBook.create student: student, subject: "Literature", grade: 5
-
-  # создадим по 2-е книги каждому студенту
-  (1..2).each do |i|
-    author = Faker::Book.author
-    title = Faker::Book.title
-    book = Book.new book_name: title, author: author
-    student.books << book
-  end
-
-  # находим 1-ого учителя
-  teacher = Teacher.first
-  # создаём класс для всех студентов и учителя с номером класса 1 на первом этаже
-  Cabinet.create number: 1, teacher_id: teacher.id, student_id: student.id, floor: 1
-
-  Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
-end
-puts 'Группа создана'
-puts 'Студенты созданы'
-puts 'Зачётки созданы'
-puts 'Книги для студента созданы'
-puts 'Класс создан'
+teacher = Teacher.first
+student = Student.first
+Timetable.create lesson: 'Informatics', teacher_id: teacher.id, student_id: student.id
 puts 'Расписание создано'
-
-# Создаём факультет с пользователем id = 1
-faculty = Faculty.create student_id: 1
-puts 'Факультет для студента создан'
-
-# Создаём название факультета
-# Добраться до названия факультета у студента можно через – faculty_name.name
-FacultyName.create faculty_id: faculty.id, name: 'МСФ'
-puts 'Название факультета создано'

@@ -1,8 +1,9 @@
 # класс
 class Cabinet < ApplicationRecord
-  # принадлежит студенту и учителю
-  belongs_to :student
-  belongs_to :teacher
+  # имеет одного учителя
+  has_one :teacher
+  # имеет одну группу
+  has_one :group
 
   # прямое соединение, имеет 0 и > расписаний
   has_and_belongs_to_many :timetables
